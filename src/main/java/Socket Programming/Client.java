@@ -7,8 +7,14 @@ import java.util.Scanner;
 
 
 public class Client {
+    public static void sum(){
+        System.out.println("Hello");
+    }
+
 
     public static void main(String[] args) {
+        Client client = null;
+        client.sum();
         Scanner scn = new Scanner(System.in);
         ByteArrayOutputStream byteArrayOutputStream =new ByteArrayOutputStream();
         ByteArrayInputStream byteArrayInputStream=null;
@@ -19,15 +25,15 @@ public class Client {
         BufferedReader bufferedReader = null;
         HashMap<String,String> hashMap = new HashMap<>();
 
-        try{
-            Socket socket = new Socket("localhost",1241);
 
+        try{
+            Socket socket = new Socket("localhost",7777);
+            while (true){
             bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             dataInputStream = new DataInputStream(socket.getInputStream());
             System.out.println("I am here");
-            dataInputStream.read();
-            objectInputStream = new ObjectInputStream(dataInputStream);
+            objectInputStream = new ObjectInputStream(new ByteArrayInputStream(dataInputStream.readAllBytes()));
 
 
                 hashMap= (HashMap<String, String>) objectInputStream.readObject();
@@ -41,11 +47,13 @@ public class Client {
                 objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
                 objectOutputStream.writeObject(hashMap);
                 objectOutputStream.flush();
+                objectOutputStream.close();
                 byte[] bytes = byteArrayOutputStream.toByteArray();
-
+            System.out.println(bytes.length);
                 DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
                 dataOutputStream.write(bytes);
                 dataOutputStream.flush();
+
 
 
 
@@ -59,8 +67,9 @@ public class Client {
 
 
         }
+        }
         catch (Exception e ){
-            System.out.println(e.getCause());
+            System.out.println(e.getMessage());
         }
 
     }
