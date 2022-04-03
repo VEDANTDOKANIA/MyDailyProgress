@@ -4,7 +4,7 @@ import org.zeromq.SocketType;
 import org.zeromq.ZContext;
 import org.zeromq.ZMQ;
 
-public class poller {
+public class ClientNew {
     public static void main(String[] args) throws Exception
     {
         //  Prepare our context and sockets
