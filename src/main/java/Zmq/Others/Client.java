@@ -1,4 +1,4 @@
-package Zmq;
+package Zmq.Others;
 
 import org.zeromq.SocketType;
 import org.zeromq.ZContext;

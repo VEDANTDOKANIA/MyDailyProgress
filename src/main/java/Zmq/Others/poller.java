@@ -1,10 +1,10 @@
-package Zmq;
+package Zmq.Others;
 
 import org.zeromq.SocketType;
 import org.zeromq.ZContext;
 import org.zeromq.ZMQ;
 
-public class ClientNew {
+public class poller {
     public static void main(String[] args) throws Exception
     {
         //  Prepare our context and sockets

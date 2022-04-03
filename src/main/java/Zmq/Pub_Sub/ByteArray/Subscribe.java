@@ -13,12 +13,14 @@ public class Subscribe {
             ZMQ.Socket socket = context.createSocket(SocketType.SUB);
             socket.connect("tcp://127.0.0.1:5553");
             Scanner scn = new Scanner(System.in);
+
             System.out.println("Enter Topic:");
             String topic = scn.next();
             byte[] topicarray = topic.getBytes(StandardCharsets.UTF_8);
             socket.subscribe(topicarray);
             String message = new String(socket.recv());
-            System.out.println(message);
+            String[] messageArray = message.split(topic);
+            System.out.println(messageArray[1]);
 
 
         }
