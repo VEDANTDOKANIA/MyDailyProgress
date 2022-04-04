@@ -31,7 +31,6 @@ public class Publish {
                 String topic = scn.next();
                 String messageTosend = String.format(topic + message);
                 byte[] arr = messageTosend.getBytes(StandardCharsets.UTF_8);
-                socket.send(arr);
                 Thread.sleep(1000);
             }
 
